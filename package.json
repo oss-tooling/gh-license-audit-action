@@ -1,0 +1,18 @@
+{
+  "name": "GitHub Enterprise License Audit",
+  "version": "1.0.0",
+  "description": "Returns enterprise licensing counts",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx ncc build"
+  },
+  "keywords": [],
+  "author": "oss-tooling",
+  "license": "ISC",
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@octokit/plugin-retry": "^4.1.3",
+    "@octokit/plugin-throttling": "^5.0.1",
+    "@octokit/rest": "^19.0.7"
+  }
+}

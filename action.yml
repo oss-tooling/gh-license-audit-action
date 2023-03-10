@@ -1,0 +1,32 @@
+name: Enterprise license audit
+description: Returns enterprise licensing counts
+inputs:
+  enterprise:
+    description: Name of the enterprise 
+    required: true
+    default: oss-tooling
+  token:
+    description: GitHub token
+    required: true
+    default: ${{ github.token }}
+outputs:
+  total-seats-purchased: 
+    description: the count of purchased seats
+  total-seats-consumed:
+    description: the count of seats consumed
+  dot-com-users:
+    description: the count of dot com users
+  server-users:
+    description: the count of server users
+  visual-studio-users:
+    description: the count of visual studio users
+  duplicates:
+    description: the count of users on both server and dot com
+  total-users:
+    description: the count of users
+  total-accounts:
+    description: the count of accounts
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
