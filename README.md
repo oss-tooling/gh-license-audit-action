@@ -10,6 +10,11 @@ with:
   enterprise: <name-of-your-enterprise>
 ```
 
+## Inputs
+
+* `enterprise`: the GitHub enterprise to audit
+* `token`: a Personal Access Token scoped with `read:enterprise` permissions
+
 ## Outputs
 
 * `total-seats-purchased`: the count of purchased seats
