@@ -1,0 +1,34 @@
+name: License report
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 0 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  check-licenses:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Calculate license usage
+        id: license
+        uses: oss-tooling/gh-license-audit-action@main
+        with:
+          enterprise: <github-org>
+          token: ${{ secrets.GH_TOKEN }}
+      - name: Update README
+        run: |
+          echo "|License|Total Seats|Seats Consumed|Dot Com Users|Server Users|Visual Studio Users|Duplicates|Total Users|Total Accounts|" > README.md
+          echo "|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|" >> README.md
+          echo "|Enterprise|${{ steps.license.outputs.total-seats-purchased }}|${{ steps.license.outputs.total-seats-consumed }}|${{ steps.license.outputs.dot-com-users }}|${{ steps.license.outputs.server-users }}|${{ steps.license.outputs.visual-studio-users }}|${{ steps.license.outputs.duplicates }}|${{ steps.license.outputs.total-users }}|${{ steps.license.outputs.total-accounts }}|" >> README.md
+          echo "" >> README.md
+          echo "**Last updated:** $(date)" >> README.md
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m '🤖 Update license counts'
+          git push
+        shell: bash
