@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx ncc build"
   },
-  "keywords": [],
+  "keywords": ["github enterprise", "github", "license"],
   "author": "oss-tooling",
   "license": "ISC",
   "dependencies": {
