@@ -26,7 +26,13 @@ outputs:
     description: the count of users
   total-accounts:
     description: the count of accounts
+  total-advanced-security-committers:
+    description: the count of advanced security committers
+  total-advanced-security-seats:
+    description: the count of advanced security seats
+
 
 runs:
   using: 'node16'
   main: 'dist/index.js'
+

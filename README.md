@@ -13,7 +13,7 @@ with:
 ## Inputs
 
 * `enterprise`: the GitHub enterprise to audit
-* `token`: a Personal Access Token scoped with `read:enterprise` permissions
+* `token`: a Personal Access Token scoped with `read:enterprise` and `manage_billing:enterprise` permissions
 
 ## Outputs
 
@@ -25,6 +25,8 @@ with:
 * `duplicates`: the count of users on both server and dot com
 * `total-users`: the count of users
 * `total-accounts`: the count of accounts
+* `total-advanced-security-committers`: the count of advanced security committers
+* `total-advanced-security-seats`: the count of advanced security seats
 
 
 ## Examples

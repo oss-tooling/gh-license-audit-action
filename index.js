@@ -29,10 +29,17 @@ const login = async () => {
       }},
   });
 
-  const licenses = await client.paginate('GET /enterprises/{enterprise}/consumed-licenses', {
+  const advancedSecurityPromise = client.request('GET /enterprises/{enterprise}/settings/billing/advanced-security', {
+    enterprise: core.getInput('enterprise'),
+  })
+
+  const licensePromise = client.paginate('GET /enterprises/{enterprise}/consumed-licenses', {
     enterprise: core.getInput('enterprise'),
     per_page: 100
   })
+
+  const [advancedSecurity, licenses] = await Promise.all([advancedSecurityPromise, licensePromise])
+
   let dotcomUsers = 0
   let serverUsers = 0
   let visualStudioUsers = 0
@@ -65,6 +72,8 @@ const login = async () => {
   core.setOutput('duplicates', duplicates)
   core.setOutput('total-users', dotcomUsers + serverUsers - duplicates)
   core.setOutput('total-accounts', accounts)
+  core.setOutput('total-advanced-security-committers', advancedSecurity.data.total_advanced_security_committers)
+  core.setOutput('total-advanced-security-seats', advancedSecurity.data.total_count)
 }
 
 login()
